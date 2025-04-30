@@ -6,23 +6,37 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 
-// 获取所有博客文章并按日期排序
-const allPosts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+export async function getStaticPaths() {
+  const allPosts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+  
+  const postsPerPage = 7;
+  const totalPages = Math.ceil(allPosts.length / postsPerPage);
+  
+  return Array.from({ length: totalPages }).map((_, i) => {
+    const pageNum = i + 1;
+    const start = i * postsPerPage;
+    const end = start + postsPerPage;
+    
+    return {
+      params: { page: pageNum.toString() },
+      props: { 
+        posts: allPosts.slice(start, end),
+        currentPage: pageNum,
+        totalPages: totalPages
+      }
+    };
+  }).filter(page => page.params.page !== "1"); // 排除第一页，因为它由index.astro处理
+}
 
-// 分页配置
-const postsPerPage = 7;
-const totalPages = Math.ceil(allPosts.length / postsPerPage);
-
-// 获取第一页的文章
-const posts = allPosts.slice(0, postsPerPage);
+const { posts, currentPage, totalPages } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`${SITE_TITLE} - 第${currentPage}页`} description={SITE_DESCRIPTION} />
 		<style>
 			main {
 				width: 960px;
@@ -143,31 +157,33 @@ const posts = allPosts.slice(0, postsPerPage);
 					}
 				</ul>
 				
-				{totalPages > 1 && (
-					<div class="pagination">
+				<div class="pagination">
+					{currentPage > 1 ? (
+						<a href={currentPage === 2 ? "/blog" : `/blog/${currentPage - 1}`}>上一页</a>
+					) : (
 						<span class="disabled">上一页</span>
-						
-						<span class="current">1</span>
-						
-						{Array.from({ length: totalPages - 1 }, (_, i) => i + 2).map((pageNum) => (
+					)}
+					
+					{currentPage > 1 && <a href="/blog">1</a>}
+					
+					{Array.from({ length: totalPages }).map((_, i) => {
+						const pageNum = i + 1;
+						if (pageNum === 1) return null;
+						return pageNum === currentPage ? (
+							<span class="current">{pageNum}</span>
+						) : (
 							<a href={`/blog/${pageNum}`}>{pageNum}</a>
-						))}
-						
-						{totalPages > 1 && (
-							<a href="/blog/2">下一页</a>
-						)}
-					</div>
-				)}
+						);
+					})}
+					
+					{currentPage < totalPages ? (
+						<a href={`/blog/${currentPage + 1}`}>下一页</a>
+					) : (
+						<span class="disabled">下一页</span>
+					)}
+				</div>
 			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
-
----
-import { getCollection } from 'astro:content';
-
-// 重定向到第一页
-Astro.response.status = 301;
-Astro.response.headers.set('Location', '/blog/1');
----
