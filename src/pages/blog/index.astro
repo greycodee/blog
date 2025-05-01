@@ -163,11 +163,3 @@ const posts = allPosts.slice(0, postsPerPage);
 		<Footer />
 	</body>
 </html>
-
----
-import { getCollection } from 'astro:content';
-
-// 重定向到第一页
-Astro.response.status = 301;
-Astro.response.headers.set('Location', '/blog/1');
----

@@ -107,8 +107,8 @@ For a wallet to own units of a certain type of token, it needs to create a token
 
 
 
-![](../../assets/b_create_a_new_token_of_solana_1.png)
-![](../../assets/b_create_a_new_token_of_solana_2.png)
+![](/b_create_a_new_token_of_solana_1.png)
+![](/b_create_a_new_token_of_solana_2.png)
 
 ## Transfer Token
 ```shell
