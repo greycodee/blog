@@ -1,9 +1,9 @@
 ---
-title: 'Adjusting the Docker Container Time Zone and Host Time Zone'
+title: 'Adjusting the Docker Container TimeZone and Host TimeZone'
 description: 'Learn how to adjust the time zone of a Docker container and the host system to ensure they are in sync.'
 tags: ['docker', 'time zone', 'container']
 pubDate: 'Apr 30 2025'
-heroImage: '/blog-placeholder-1.jpg'
+heroImage: '/h_adjusting_the_docker_container_time_zone_and_host_timezone.png'
 ---
 
 ## Check the Host Time Zone
