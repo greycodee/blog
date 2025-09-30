@@ -16,22 +16,8 @@
 		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
 		0 16px 32px rgba(var(--gray), 33%);
 }
-@font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-regular.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-bold.woff') format('woff');
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
 body {
-	font-family: 'Atkinson', sans-serif;
+	font-family: 'Inter', sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -40,11 +26,11 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+	font-size: 18px;
+	line-height: 1.58;
 }
 main {
-	width: 720px;
+	width: 700px;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
@@ -60,19 +46,19 @@ h6 {
 	line-height: 1.2;
 }
 h1 {
-	font-size: 3.052em;
+	font-size: 1.89em;
 }
 h2 {
-	font-size: 2.441em;
+	font-size: 1.56em;
 }
 h3 {
-	font-size: 1.953em;
+	font-size: 1.22em;
 }
 h4 {
-	font-size: 1.563em;
+	font-size: 1em;
 }
 h5 {
-	font-size: 1.25em;
+	font-size: 0.89em;
 }
 strong,
 b {
@@ -88,7 +74,7 @@ p {
 	margin-bottom: 1em;
 }
 .prose p {
-	margin-bottom: 2em;
+	margin-bottom: 1.5em;
 }
 textarea {
 	width: 100%;
@@ -111,7 +97,7 @@ code {
 	border-radius: 2px;
 }
 pre {
-	padding: 1.5em;
+	padding: 1em;
 	border-radius: 8px;
 }
 pre > code {
@@ -121,7 +107,7 @@ blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
 	margin: 0px;
-	font-size: 1.333em;
+	font-size: 1em;
 }
 hr {
 	border: none;
